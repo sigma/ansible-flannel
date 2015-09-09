@@ -27,7 +27,7 @@
   
 - name: Stop docker
   sudo: yes
-  service: name=docker.service state=stopped
+  service: name={{docker_service}} state=stopped
   when: flannel_started.changed
   register: docker_stopped
 
@@ -41,5 +41,5 @@
 
 - name: Start docker
   sudo: yes
-  service: name=docker.service state=started
+  service: name={{docker_service}} state=started
   when: docker_stopped.changed

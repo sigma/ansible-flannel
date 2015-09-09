@@ -1,7 +1,7 @@
 [Unit]
 Requires={{flanneld_service}}
 After={{flanneld_service}}
-Before=docker.service
+Before={{docker_service}}
 
 [Service]
 ExecStart=/usr/bin/sleep infinity
