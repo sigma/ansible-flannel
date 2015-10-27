@@ -22,6 +22,10 @@
 
 - name: Start flannel
   sudo: yes
+  service: name=flanneld.service state=started
+
+- name: Start flannel-install
+  sudo: yes
   service: name=flanneld-install.service state=started enabled=yes
   register: flannel_started
   
