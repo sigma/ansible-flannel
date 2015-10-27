@@ -1,6 +1,7 @@
 flannel
 ============
 
+current version: 0.0.0
 Setup a flannel network
 
 Role Variables
