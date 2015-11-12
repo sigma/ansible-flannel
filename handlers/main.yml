@@ -1,0 +1,42 @@
+---
+- name: reload systemd
+  sudo: true
+  command: systemctl daemon-reload
+  notify:
+    - restart daemons
+
+- name: restart daemons
+  command: /bin/true
+  notify:
+    - start flannel
+    - start flannel install
+
+- name: start flannel
+  sudo: yes
+  service: name=flanneld.service state=started
+  retries: 2
+  delay: 5
+
+- name: start flannel install
+  sudo: true
+  service: name=flanneld-install.service state=started enabled=yes
+  notify:
+    - stop docker
+
+- name: stop docker
+  sudo: yes
+  service: name={{docker_service}} state=stopped
+  notify:
+    - destroy docker0
+
+- name: destroy docker0
+  sudo: yes
+  shell: >
+    ip link set docker0 down &&
+    brctl delbr docker0 ||
+    true
+  notify: start docker
+
+- name: start docker
+  sudo: yes
+  service: name={{docker_service}} state=started
