@@ -5,6 +5,8 @@ flanneld_dropin_dir: "/etc/systemd/system/{{flanneld_service}}.d"
 flanneld_network: "172.42.0.0/16"
 flanneld_backend_type: "host-gw"
 docker_service: "docker.service"
-flannel_options_env: "/run/flannel/options.env"
+
+flannel_options_dir: "/run/flannel"
+flannel_options_env: "{{flannel_options_dir}}/options.env"
 
 etcd_certs_root: "/etc/ssl/etcd"

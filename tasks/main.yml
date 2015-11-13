@@ -5,6 +5,10 @@
   sudo: yes
   sudo_user: root
 
+- name: Create flannel options dir
+  sudo: yes
+  file: path={{flannel_options_dir}} state=directory mode=0755
+
 - name: Set flannel options
   sudo: yes
   template: src=options.env.j2 dest={{flannel_options_env}} mode=0644

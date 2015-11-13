@@ -14,6 +14,7 @@
 - name: start flannel
   sudo: yes
   service: name=flanneld.service state=started
+  register: flanneld
   retries: 2
   delay: 5
 
